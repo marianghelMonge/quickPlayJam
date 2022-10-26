@@ -12,8 +12,10 @@ public class playerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        Debug.Log("x> "+movement.x);
+        Debug.Log("y> "+movement.x);
     }
-    void fixedUpdate()//movement
+    void FixedUpdate()//movement
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
