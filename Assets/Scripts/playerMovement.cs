@@ -8,12 +8,11 @@ public class playerMovement : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 movement; //get horizontal and vertical
     // Update is called once per frame
+    public Joystick joystick;
     void Update()//Input
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        Debug.Log("x> "+movement.x);
-        Debug.Log("y> "+movement.x);
+        movement.x = joystick.Horizontal;
+        movement.y = joystick.Vertical;
     }
     void FixedUpdate()//movement
     {
