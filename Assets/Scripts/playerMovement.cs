@@ -15,6 +15,9 @@ public class playerMovement : MonoBehaviour
     public GameObject bg3;
     private int countScene=0;
     public GameObject[] BG;
+    
+   
+
     void Update()//Input
     {
         movement.x = joystick.Horizontal;
@@ -23,6 +26,10 @@ public class playerMovement : MonoBehaviour
     void FixedUpdate()//movement
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    private void countUntilTen(){
+        
     }
 
     private void OnTriggerEnter2D(Collider2D trigger) {
@@ -47,12 +54,9 @@ public class playerMovement : MonoBehaviour
             }
              foreach(GameObject bg in BG)               
                  countScene +=1;
-                
         }
         if(trigger.gameObject.tag == "scene"){
            SceneManager.LoadScene(2);
-          // Debug.Log("Fire fire scene");
-           //transform.gameObject.tag = "background";
-        } 
+        }         
     }
 }
