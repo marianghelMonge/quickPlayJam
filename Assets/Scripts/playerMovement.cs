@@ -15,9 +15,8 @@ public class playerMovement : MonoBehaviour
     public GameObject bg3;
     private int countScene=0;
     public GameObject[] BG;
-    
+    public CapsuleCollider2D playerBarrier;
    
-
     void Update()//Input
     {
         movement.x = joystick.Horizontal;
@@ -26,10 +25,6 @@ public class playerMovement : MonoBehaviour
     void FixedUpdate()//movement
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-    }
-
-    private void countUntilTen(){
-        
     }
 
     private void OnTriggerEnter2D(Collider2D trigger) {

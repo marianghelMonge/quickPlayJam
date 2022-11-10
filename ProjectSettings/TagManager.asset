@@ -8,6 +8,7 @@ TagManager:
   - background
   - scene
   - player
+  - heroFloor
   layers:
   - Default
   - TransparentFX
