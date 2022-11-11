@@ -11,8 +11,8 @@ public class TimerCount : MonoBehaviour
      private GameObject timeTxtObject;
      private float time = 10.0f;
      private string timer = "";
-     private bool timerOut= false;
-     private bool isFloorHero = false;
+     public bool timerOut= false;
+     private bool isFloorHero = true;
      [SerializeField] Color32 available = new Color(1,1,1,1);
      [SerializeField] Color32 danger = new Color(1,1,1,1);
      [SerializeField] Color32 mistery = new Color(1,1,1,1);
@@ -20,19 +20,21 @@ public class TimerCount : MonoBehaviour
      [SerializeField] public bool[] valueRound = new bool[]{ true, true, false};
     private bool getValueRound=false;
     private int roundNum=0;
-     public CapsuleCollider2D box_foot;
+    public CapsuleCollider2D box_foot;
+    Transform bar;
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        //timerON();
+      //  bar = GameObject.Find("enemy").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
        timerDecrease();
+        validateIsPlayerInFloor();
+      // transform.position = new Vector3(bar.position.x, transform.position.y, transform.position.z);
     }
 
     private void timerDecrease(){
@@ -46,30 +48,36 @@ public class TimerCount : MonoBehaviour
         }
     }
 
+    private void resetTimer(){
+        timeTxtObject.SetActive(true);
+        time = 10.0f;        
+        timerOut=false;
+    }
+
     //Player inside of a trigger 
     private void OnTriggerStay2D(Collider2D box_foot) {
-        if(box_foot.gameObject.tag == "player"){
-           // isFloorHero = true;
+       // if(box_foot.gameObject.tag == "player"){
+            //isFloorHero = true;
            //roundColor(roundNum);
-           validateIsPlayerInFloor();
-        }else{
+          
+       // }else{
            // isFloorHero = false;
-        }
+     //   }
     }    
 
 
     private void validateIsPlayerInFloor(){
         if( timerOut == true ){
-           // if(isFloorHero == true){
-               if(getValueRound){
-                Debug.Log("sigue jugando");       
-               }else{
-                Debug.Log("esta mamando");
-               }
-                //disable movement
-           // }else{
-              //enable movement                            
-          // }
+            Debug.Log(getValueRound);
+            Debug.Log(isFloorHero);
+            if(isFloorHero == getValueRound){
+                resetTimer();
+                Debug.Log("Fire");
+            }else{
+                Debug.Log("F");
+                //monster animation
+                //monster movement
+            }
         }
     }
 
@@ -85,17 +93,4 @@ public class TimerCount : MonoBehaviour
             roundNum = RoundNum++;
         }    
     }
-
-   /* private void timerON(){
-        timeTxtObject.SetActive(true);
-        time = 10.0f;
-        Debug.Log("entro");
-        timerOFF();
-    }*/
-
-
-
-
-    //TO DO
-    // Hacer un trigger que avise cuando el player saliro del trigger.
 }

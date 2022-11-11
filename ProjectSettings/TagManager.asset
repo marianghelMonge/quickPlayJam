@@ -9,6 +9,7 @@ TagManager:
   - scene
   - player
   - heroFloor
+  - enemy
   layers:
   - Default
   - TransparentFX

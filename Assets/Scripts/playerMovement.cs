@@ -15,16 +15,27 @@ public class playerMovement : MonoBehaviour
     public GameObject bg3;
     private int countScene=0;
     public GameObject[] BG;
-    public CapsuleCollider2D playerBarrier;
-   
+    public Animator animator;
+    TimerCount timer;
+  
+    void Start() {
+        timer = FindObjectOfType<TimerCount>();
+    }
     void Update()//Input
     {
         movement.x = joystick.Horizontal;
         movement.y = joystick.Vertical;
+
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("speed", movement.sqrMagnitude);
     }
     void FixedUpdate()//movement
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        //Debug.Log(timer.timerOut);
+        if(timer.timerOut == false){
+            rb.MovePosition(rb.position +  movement * moveSpeed * Time.fixedDeltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D trigger) {
